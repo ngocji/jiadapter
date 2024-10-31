@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
+    id("maven-publish")
 }
 
 android {
@@ -37,4 +38,14 @@ android {
 
 dependencies {
     implementation(libs.bundles.androidX)
+}
+
+publishing {
+    publications {
+        create<MavenPublication>("jiadapter") {
+            groupId = "com.ngocji"
+            artifactId = "jiadapter"
+            version = "1.0.0"
+        }
+    }
 }
