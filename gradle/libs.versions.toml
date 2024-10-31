@@ -1,0 +1,152 @@
+[versions]
+androidGradlePlugin = "8.6.1"
+kotlin = "2.0.0"
+
+#AndroidX version
+androidxCore = "1.13.1"
+androidxLifecycle = "2.8.6"
+androidXDatastore = "1.1.1"
+androidXSplashScreen = "1.0.1"
+androidXExifinterface = "1.3.7"
+androidXCamera = "1.3.4"
+androidXMedia3 = "1.4.1"
+androidXRoom = "2.6.1"
+androidXWorkManager = "2.9.1"
+androidxAppcompat = "1.7.0"
+androidxNavigation = "2.8.3"
+androidxSwipeRefreshLayout = "1.1.0"
+
+#Common
+material = "1.12.0"
+admob = "23.4.0"
+admobUmp = "3.0.0"
+billing = "7.1.1"
+hilt = "2.50"
+hiltWorker = "1.2.0"
+language = "1.3.0"
+timber = "5.0.1"
+lottie = "6.3.0"
+gson = "2.10.1"
+dateTime = "1.4.6"
+glide = "4.15.1"
+
+#Retrofit
+retrofit = "2.10.0"
+retrofitLogging = "5.0.0-alpha.8"
+
+#Coroutine
+coroutine = "1.7.3"
+
+#Firebase
+firebase = "33.5.0"
+firebaseService = "4.4.2"
+firebaseCrashlytics = "3.0.2"
+firebaseSecrets = "2.0.1"
+
+[libraries]
+#AndroidX
+androidx-core = { module = "androidx.core:core-ktx", version.ref = "androidxCore" }
+
+androidx-work-manager = { module = "androidx.work:work-runtime-ktx", version.ref = "androidXWorkManager" }
+androidx-core-splashscreen = { module = "androidx.core:core-splashscreen", version.ref = "androidXSplashScreen" }
+androidx-datastore = { module = "androidx.datastore:datastore", version.ref = "androidXDatastore" }
+androidx-datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "androidXDatastore" }
+androidx-exifinterface = { module = "androidx.exifinterface:exifinterface", version.ref = "androidXExifinterface" }
+
+androidx-lifecycle-runtime-ktx = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "androidxLifecycle" }
+androidx-lifecycle-process = { group = "androidx.lifecycle", name = "lifecycle-process", version.ref = "androidxLifecycle" }
+androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "androidxAppcompat" }
+androidx-navigation-ktx = { module = "androidx.navigation:navigation-fragment-ktx", version.ref = "androidxNavigation" }
+androidx-navigation-ui = { module = "androidx.navigation:navigation-ui-ktx", version.ref = "androidxNavigation" }
+androidx-swiperefreshlayout = { module = "androidx.swiperefreshlayout:swiperefreshlayout", version.ref = "androidxSwipeRefreshLayout" }
+
+#AndroidX camera
+androidx-camera-core = { module = "androidx.camera:camera-core", version.ref = "androidXCamera" }
+androidx-camera-camera2 = { module = "androidx.camera:camera-camera2", version.ref = "androidXCamera" }
+androidx-camera-lifecycle = { module = "androidx.camera:camera-lifecycle", version.ref = "androidXCamera" }
+androidx-camera-video = { module = "androidx.camera:camera-video", version.ref = "androidXCamera" }
+androidx-camera-extensions = { module = "androidx.camera:camera-extensions", version.ref = "androidXCamera" }
+androidx-camera-view = { module = "androidx.camera:camera-view", version.ref = "androidXCamera" }
+
+#AndroidX media3
+androidx-media-player = { module = "androidx.media3:media3-exoplayer", version.ref = "androidXMedia3" }
+androidx-media-ui = { module = "androidx.media3:media3-ui", version.ref = "androidXMedia3" }
+
+#AndroidX room
+androidx-room = { module = "androidx.room:room-ktx", version.ref = "androidXRoom" }
+androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "androidXRoom" }
+androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "androidXRoom" }
+androidx-room-paging = { module = "androidx.room:room-paging", version.ref = "androidXRoom" }
+
+
+#Common
+material = { module = "com.google.android.material:material", version.ref = "material" }
+dateTime = { module = "com.jakewharton.threetenabp:threetenabp", version.ref = "dateTime" }
+billing = { module = "com.android.billingclient:billing-ktx", version.ref = "billing" }
+language = { module = "com.github.YarikSOffice:lingver", version.ref = "language" }
+timber = { module = "com.jakewharton.timber:timber", version.ref = "timber" }
+lottie = { module = "com.airbnb.android:lottie", version.ref = "lottie" }
+gson = { module = "com.google.code.gson:gson", version.ref = "gson" }
+glide = { module = "com.github.bumptech.glide:glide", version.ref = "glide" }
+glide-compiler = {module = "com.github.bumptech.glide:compiler", version.ref = "glide"}
+
+#Retrofit
+retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
+retrofit-converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "retrofit" }
+retrofit-logging = { module = "com.squareup.okhttp3:logging-interceptor", version.ref = "retrofitLogging" }
+
+#Ads
+ads-admob = { module = "com.google.android.gms:play-services-ads", version.ref = "admob" }
+ads-ump = { module = "com.google.android.ump:user-messaging-platform", version.ref = "admobUmp" }
+
+#Hilt
+hilt-core = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
+hilt-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hilt" }
+hilt-worker = { module = "androidx.hilt:hilt-work", version.ref = "hiltWorker" }
+hilt-worker-compiler = { module = "androidx.hilt:hilt-compiler", version.ref = "hiltWorker" }
+
+#Coroutine
+coroutine = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutine" }
+coroutine-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "coroutine" }
+
+#Firebase
+firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebase" }
+firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics-ktx" }
+firebase-analytics = { module = "com.google.firebase:firebase-analytics-ktx" }
+firebase-database = { module = "com.google.firebase:firebase-database-ktx" }
+firebase-auth = { module = "com.google.firebase:firebase-auth-ktx" }
+firebase-dynamic-links = { module = "com.google.firebase:firebase-dynamic-links-ktx" }
+firebase-messaging = { module = "com.google.firebase:firebase-messaging-ktx" }
+firebase-config = { module = "com.google.firebase:firebase-config-ktx" }
+firebase-appcheck-playintegrity = { module = "com.google.firebase:firebase-appcheck-playintegrity" }
+firebase-appcheck-debug = { module = "com.google.firebase:firebase-appcheck-debug" }
+firebase-performance = { module = "com.google.firebase:firebase-perf-ktx" }
+firebase-firestore = { module = "com.google.firebase:firebase-firestore-ktx" }
+
+[bundles]
+common = ["material", "dateTime", "timber", "gson", "language", "glide", "lottie"]
+common-compiler = ["glide-compiler"]
+
+admob = ["ads-admob", "ads-ump"]
+room = ["androidx-room", "androidx-room-runtime", "androidx-room-paging"]
+retrofit = ["retrofit", "retrofit-converter-gson", "retrofit-logging"]
+
+androidX = ["androidx-core", "androidx-datastore", "androidx-datastore-preferences", "androidx-exifinterface", "androidx-lifecycle-runtime-ktx", "androidx-lifecycle-process", "androidx-core-splashscreen", "androidx-appcompat", "androidx-navigation-ktx", "androidx-navigation-ui", "androidx-swiperefreshlayout"]
+camera = ["androidx-camera-core", "androidx-camera-camera2", "androidx-camera-extensions", "androidx-camera-lifecycle", "androidx-camera-video", "androidx-camera-view"]
+media3 = ["androidx-media-player", "androidx-media-ui"]
+hilt = ["hilt-core", "androidx-work-manager", "hilt-worker"]
+hilt-compiler = ["hilt-compiler", "hilt-worker-compiler"]
+coroutine = ["coroutine", "coroutine-android"]
+
+firebase-common = ["firebase-crashlytics", "firebase-analytics", "firebase-messaging", "firebase-config", "firebase-database"]
+firebase-performance = ["firebase-appcheck-debug", "firebase-appcheck-playintegrity", "firebase-performance"]
+
+[plugins]
+android-application = { id = "com.android.application", version.ref = "androidGradlePlugin" }
+android-library = { id = "com.android.library", version.ref = "androidGradlePlugin" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+hilt-gradle = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
+firebase-service-gradle = { id = "com.google.gms.google-services", version.ref = "firebaseService" }
+firebase-crashlytics-gradle = { id = "com.google.firebase.crashlytics", version.ref = "firebaseCrashlytics" }
+firebase-secrets-gradle = { id = "com.google.android.libraries.mapsplatform.secrets-gradle-plugin", version.ref = "firebaseSecrets" }
+kotlin-parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize", version.ref = "kotlin" }
