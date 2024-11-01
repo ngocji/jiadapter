@@ -1,4 +1,4 @@
-package com.jibase.utils
+package com.jibase.iflexible.utils
 
 import androidx.annotation.DimenRes
 import androidx.recyclerview.widget.LinearLayoutManager

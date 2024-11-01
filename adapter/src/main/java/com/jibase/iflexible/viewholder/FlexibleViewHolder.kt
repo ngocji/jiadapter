@@ -5,15 +5,16 @@ import android.annotation.SuppressLint
 import android.view.MotionEvent
 import android.view.View
 import androidx.annotation.CallSuper
+import androidx.core.view.ViewCompat
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
-import com.jibase.extensions.changeElevation
 import com.jibase.iflexible.helpers.ItemTouchHelperCallback
 import com.jibase.iflexible.adapter.FlexibleAdapter
 import com.jibase.iflexible.adapter.FlexibleAdapter.Companion.MULTI
 import com.jibase.iflexible.utils.LayoutUtils
-import com.jibase.utils.Log
+import com.jibase.iflexible.utils.Log
 
+@Suppress("unused")
 abstract class FlexibleViewHolder(preItemView: View, adapter: FlexibleAdapter<*>, isStickyHeader: Boolean = false) : AbstractContentViewHolder(preItemView, adapter, isStickyHeader), ItemTouchHelperCallback.ViewHolderCallback, View.OnClickListener, View.OnLongClickListener, View.OnTouchListener {
     // These 2 fields avoid double tactile feedback triggered by Android during the touch event
     // (Drag or Swipe), also assure the LongClick event is correctly fired for ActionMode if that
@@ -139,10 +140,10 @@ abstract class FlexibleViewHolder(preItemView: View, adapter: FlexibleAdapter<*>
             if (adapter.getStickyPosition() == position) adapter.ensureHeaderParent()
             // Apply elevation
             if (contentView.isActivated && getActivationElevation() > 0)
-                itemView.changeElevation(getActivationElevation())
+                ViewCompat.setElevation(itemView, getActivationElevation())
             else if (getActivationElevation() > 0)
             //Leave unaltered the default elevation
-                itemView.changeElevation(0f)
+                ViewCompat.setElevation(itemView, 0f)
         }
     }
 

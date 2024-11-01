@@ -1,9 +1,8 @@
-package com.jibase.view
+package com.jibase.iflexible.view
 
 import android.view.View
 import android.widget.TextView
 import androidx.annotation.StringRes
-import androidx.core.content.ContextCompat
 import com.google.android.material.snackbar.Snackbar
 import com.jibase.R
 

@@ -48,6 +48,7 @@ android {
 
 dependencies {
     implementation(libs.bundles.androidX)
+    implementation(libs.material)
 }
 
 publishing {

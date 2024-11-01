@@ -11,16 +11,12 @@ import android.view.animation.LinearInterpolator
 import androidx.annotation.IntRange
 import androidx.recyclerview.widget.RecyclerView
 import com.jibase.iflexible.viewholder.FlexibleViewHolder
-import com.jibase.utils.Log
+import com.jibase.iflexible.utils.Log
 import java.util.*
 
 abstract class AbstractFlexibleAnimatorAdapter(hasStateId: Boolean) : AbstractFlexibleAdapter() {
     private val TAG = javaClass.simpleName
     private val DEFAULT_DURATION = 300L
-
-    private enum class AnimatorEnum {
-        ALPHA, SLIDE_IN_LEFT, SLIDE_IN_RIGHT, SLIDE_IN_BOTTOM, SLIDE_IN_TOP, SCALE
-    }
 
     private var interpolator: Interpolator = LinearInterpolator()
     private val animatorNotifierObserver = AnimatorAdapterDataObserver()
@@ -44,8 +40,6 @@ abstract class AbstractFlexibleAnimatorAdapter(hasStateId: Boolean) : AbstractFl
     /**
      * Contains type of animators already added
      */
-    private val animatorsUsed = EnumSet.noneOf(AnimatorEnum::class.java)
-
     private var isReverseEnabled = false
     private var isForwardEnabled = false
     private var onlyEntryAnimation = false
@@ -368,10 +362,10 @@ abstract class AbstractFlexibleAnimatorAdapter(hasStateId: Boolean) : AbstractFl
     inner class AnimatorAdapterDataObserver : RecyclerView.AdapterDataObserver() {
         var isPositionNotified: Boolean = false
             private set
-        private val animatorHandler = Handler(Looper.getMainLooper(), Handler.Callback {
+        private val animatorHandler = Handler(Looper.getMainLooper()) {
             isPositionNotified = false
             true
-        })
+        }
 
         fun clearNotified() {
             if (isPositionNotified) {

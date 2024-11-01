@@ -9,8 +9,8 @@ import com.jibase.iflexible.adapter.FlexibleAdapter
 import com.jibase.iflexible.listener.OnDeleteCompleteListener
 import com.jibase.iflexible.listener.OnUndoActionListener
 import com.google.android.material.snackbar.Snackbar
-import com.jibase.utils.Log
-import com.jibase.view.ISnackBar
+import com.jibase.iflexible.utils.Log
+import com.jibase.iflexible.view.ISnackBar
 
 class UndoHelper(val adapter: FlexibleAdapter<*>, val callback: OnUndoActionListener) : Snackbar.Callback(), OnDeleteCompleteListener {
     annotation class Action {

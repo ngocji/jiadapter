@@ -4,11 +4,12 @@ import android.os.*
 import android.view.ViewGroup
 import androidx.annotation.CallSuper
 import androidx.annotation.IntRange
+import androidx.core.view.isInvisible
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar.Callback.DISMISS_EVENT_MANUAL
-import com.jibase.extensions.*
 import com.jibase.iflexible.entities.Notification
 import com.jibase.iflexible.entities.Notification.Companion.ADD
 import com.jibase.iflexible.entities.Notification.Companion.CHANGE
@@ -16,14 +17,15 @@ import com.jibase.iflexible.entities.Notification.Companion.MOVE
 import com.jibase.iflexible.entities.Notification.Companion.NONE
 import com.jibase.iflexible.entities.Notification.Companion.REMOVE
 import com.jibase.iflexible.entities.Payload
+import com.jibase.iflexible.extensions.hasPosition
 import com.jibase.iflexible.helpers.FlexibleDiffCallback
 import com.jibase.iflexible.helpers.ItemTouchHelperCallback
 import com.jibase.iflexible.helpers.StickyHeaderHelper
 import com.jibase.iflexible.items.interfaceItems.*
 import com.jibase.iflexible.listener.*
+import com.jibase.iflexible.utils.Log
 import com.jibase.iflexible.viewholder.FlexibleExpandableViewHolder
 import com.jibase.iflexible.viewholder.FlexibleViewHolder
-import com.jibase.utils.Log
 import java.util.*
 import kotlin.math.ceil
 import kotlin.math.max
@@ -35,13 +37,13 @@ open class FlexibleAdapter<T : IFlexible<*>>(
 ) : AbstractFlexibleAnimatorAdapter(hasStateId), ItemTouchHelperCallback.AdapterCallback {
 
     companion object {
-        private val TAG = "FlexibleAdapter"
-        val EXTRA_PARENT = TAG + "_parentSelected"
-        val EXTRA_CHILD = TAG + "_childSelected"
-        val EXTRA_HEADERS = TAG + "_headersShown"
-        val EXTRA_STICKY = TAG + "_stickyHeaders"
-        val EXTRA_LEVEL = TAG + "_selectedLevel"
-        val EXTRA_FILTER = TAG + "_filter"
+        private const val TAG = "FlexibleAdapter"
+        const val EXTRA_PARENT = TAG + "_parentSelected"
+        const val EXTRA_CHILD = TAG + "_childSelected"
+        const val EXTRA_HEADERS = TAG + "_headersShown"
+        const val EXTRA_STICKY = TAG + "_stickyHeaders"
+        const val EXTRA_LEVEL = TAG + "_selectedLevel"
+        const val EXTRA_FILTER = TAG + "_filter"
 
         private const val MSG_UPDATE = 1
         private const val MSG_FILTER = 2
@@ -168,6 +170,7 @@ open class FlexibleAdapter<T : IFlexible<*>>(
                     holder.contentView.setOnClickListener(holder)
                 }
             }
+
             is OnItemLongClickListener -> {
                 Log.d("- OnItemLongClickListener", TAG)
                 onItemLongClickListener = listener
@@ -186,6 +189,7 @@ open class FlexibleAdapter<T : IFlexible<*>>(
                 Log.d("- OnItemSwipeListener", TAG)
                 onItemSwipeListener = listener
             }
+
             is OnDeleteCompleteListener -> {
                 Log.d("- OnDeleteCompleteListener", TAG)
                 onDeleteCompleteListener = listener
@@ -195,6 +199,7 @@ open class FlexibleAdapter<T : IFlexible<*>>(
                 Log.d("- OnStickyHeaderChangeListener", TAG)
                 onStickyHeaderChangeListener = listener
             }
+
             is OnUpdateListener -> {
                 Log.d("- OnUpdateListener", TAG)
                 onUpdateListener = listener
@@ -236,6 +241,7 @@ open class FlexibleAdapter<T : IFlexible<*>>(
                     holder.contentView.setOnClickListener(null)
                 }
             }
+
             is OnItemLongClickListener -> {
                 Log.d("- Remove OnItemLongClickListener", TAG)
                 onItemLongClickListener = null
@@ -254,6 +260,7 @@ open class FlexibleAdapter<T : IFlexible<*>>(
                 Log.d("- Remove OnItemSwipeListener", TAG)
                 onItemSwipeListener = null
             }
+
             is OnDeleteCompleteListener -> {
                 Log.d("- Remove OnDeleteCompleteListener", TAG)
                 onDeleteCompleteListener = null
@@ -263,6 +270,7 @@ open class FlexibleAdapter<T : IFlexible<*>>(
                 Log.d("- Remove OnStickyHeaderChangeListener", TAG)
                 onStickyHeaderChangeListener = null
             }
+
             is OnUpdateListener -> {
                 Log.d("- Remove OnUpdateListener", TAG)
                 onUpdateListener = null
@@ -1607,12 +1615,12 @@ open class FlexibleAdapter<T : IFlexible<*>>(
             if (areHeadersSticky() &&
                 isHeader(item) &&
                 !isFastScroll &&
-                (mStickyHeaderHelper?.getStickyPosition() ?: -1 >= 0) &&
+                ((mStickyHeaderHelper?.getStickyPosition() ?: -1) >= 0) &&
                 payloads.isEmpty()
             ) {
                 val headerPos = getFlexibleLayoutManager().findFirstVisibleItemPosition() - 1
                 if (headerPos == position) {
-                    holder.itemView.invisible()
+                    holder.itemView.isInvisible = true
                 }
             }
         }
@@ -1642,7 +1650,7 @@ open class FlexibleAdapter<T : IFlexible<*>>(
         super.onViewRecycled(holder)
         if (areHeadersSticky()) {
             //  Empty (Invisible) Header Item when Using Sticky Headers
-            holder.itemView.visible()
+            holder.itemView.isVisible = true
         }
         val position = holder.adapterPosition
         getItem(position)?.unbindViewHolder(this, holder, position)
@@ -1826,7 +1834,7 @@ open class FlexibleAdapter<T : IFlexible<*>>(
     fun setEndlessProgressItem(progressItem: T?): FlexibleAdapter<T> {
         endlessScrollEnabled = progressItem != null
 
-        if (progressItem!=null) {
+        if (progressItem != null) {
             setEndlessScrollThreshold(mEndlessScrollThreshold)
             mProgressItem = progressItem
             Log.d("Enabled EndlessScrolling Item=$progressItem  enable=$endlessScrollEnabled", TAG)
@@ -1954,7 +1962,6 @@ open class FlexibleAdapter<T : IFlexible<*>>(
         } else if (delay >= 0) {
             hideProgressItem()
         }
-
 
 
         // Add any new items
@@ -4795,6 +4802,7 @@ open class FlexibleAdapter<T : IFlexible<*>>(
                     mFilterAsyncTask?.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR)
                     return true
                 }
+
                 MSG_LOAD_MORE_COMPLETE -> {
                     //hide progress item
                     hideProgressItem()
@@ -4840,6 +4848,7 @@ open class FlexibleAdapter<T : IFlexible<*>>(
                     toggleAnimate(listDoing, Payload.CHANGE)
                     Log.d("doInBackground - ended MSG_UPDATE", TAG)
                 }
+
                 MSG_FILTER -> {
                     Log.d("doInBackground - started MSG_FILTER", TAG)
                     filterItemsAsync(listDoing)
@@ -4858,6 +4867,7 @@ open class FlexibleAdapter<T : IFlexible<*>>(
                         executeNotifications(Payload.CHANGE)
                         onPostUpdate()
                     }
+
                     MSG_FILTER -> {
                         // Notify all the changes
                         executeNotifications(Payload.FILTER)

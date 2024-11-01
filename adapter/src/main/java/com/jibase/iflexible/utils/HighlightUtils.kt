@@ -1,4 +1,4 @@
-package com.jibase.utils
+package com.jibase.iflexible.utils
 
 import android.content.Context
 import android.graphics.Typeface
@@ -28,7 +28,8 @@ object HighlightUtils {
                       constraint: String,
                       hasBold: Boolean = true,
                       originalText: String = view.text.toString(),
-                      color: Int = fetchAccentColor(view.context)) {
+                      color: Int = fetchAccentColor(view.context)
+    ) {
         val constraintFix = constraint.lowercase()
         val start = originalText.lowercase().indexOf(constraintFix)
         if (start != -1) {
@@ -53,7 +54,8 @@ object HighlightUtils {
                        constraint: String,
                        hasBold: Boolean = true,
                        originalText: String = view.text.toString(),
-                       color: Int = fetchAccentColor(view.context)) {
+                       color: Int = fetchAccentColor(view.context)
+    ) {
         val constraintsNormalizer = constraint.lowercase()
         val originalTextNormalizer = originalText.lowercase()
 

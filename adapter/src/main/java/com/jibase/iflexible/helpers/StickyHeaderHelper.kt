@@ -9,14 +9,13 @@ import android.widget.FrameLayout
 import androidx.core.view.*
 import androidx.recyclerview.widget.OrientationHelper
 import androidx.recyclerview.widget.RecyclerView
-import com.jibase.extensions.invisible
-import com.jibase.extensions.visible
 import com.jibase.iflexible.adapter.FlexibleAdapter
 import com.jibase.iflexible.items.interfaceItems.IFlexible
 import com.jibase.iflexible.listener.OnStickyHeaderChangeListener
 import com.jibase.iflexible.viewholder.FlexibleViewHolder
-import com.jibase.utils.Log
+import com.jibase.iflexible.utils.Log
 
+@Suppress("SameParameterValue")
 class StickyHeaderHelper<T : IFlexible<*>>(
         private val mAdapter: FlexibleAdapter<T>,
         private val mStickyHeaderChangeListener: OnStickyHeaderChangeListener?,
@@ -80,7 +79,7 @@ class StickyHeaderHelper<T : IFlexible<*>>(
             holder.itemView.layoutParams.width = holder.contentView.measuredWidth
             holder.itemView.layoutParams.height = holder.contentView.measuredHeight
             // Ensure the itemView is hidden to avoid double background
-            holder.itemView.invisible()
+            holder.itemView.isInvisible = true
             Log.d("Ensure headerParent: ${holder.itemView.measuredWidth} / ${holder.itemView.measuredHeight} / ${holder.itemView.visibility}")
             applyLayoutParamsAndMargins(holder.contentView)
             removeViewFromParent(holder.contentView)
@@ -217,7 +216,7 @@ class StickyHeaderHelper<T : IFlexible<*>>(
             if (mElevation > 0) {
                 // Needed to elevate the view
                 mStickyHolderLayout?.also {
-                    ViewCompat.setBackground(it, holder.background)
+                    it.background = holder.background
                 }
             }
         }
@@ -246,7 +245,7 @@ class StickyHeaderHelper<T : IFlexible<*>>(
                                 val nextHeaderOffsetX = nextChild.left - headerWidth -
                                         manager.getLeftDecorationWidth(nextChild) -
                                         manager.getRightDecorationWidth(nextChild)
-                                headerOffsetX = Math.min(nextHeaderOffsetX, 0)
+                                headerOffsetX = nextHeaderOffsetX.coerceAtMost(0)
                                 // Early remove the elevation/shadow to match with the next view
                                 if (nextHeaderOffsetX < 5) elevation = 0f
                                 if (headerOffsetX < 0) break
@@ -257,7 +256,7 @@ class StickyHeaderHelper<T : IFlexible<*>>(
                                 val nextHeaderOffsetY = nextChild.top - headerHeight -
                                         manager.getTopDecorationHeight(nextChild) -
                                         manager.getBottomDecorationHeight(nextChild)
-                                headerOffsetY = Math.min(nextHeaderOffsetY, 0)
+                                headerOffsetY = nextHeaderOffsetY.coerceAtMost(0)
                                 // Early remove the elevation/shadow to match with the next view
                                 if (nextHeaderOffsetY < 5) elevation = 0f
                                 if (headerOffsetY < 0) break
@@ -324,7 +323,7 @@ class StickyHeaderHelper<T : IFlexible<*>>(
             val oldHeader = mRecyclerView.getChildAt(i)
             val headerPos = mRecyclerView.getChildAdapterPosition(oldHeader)
             if (mAdapter.isHeader(mAdapter.getItem(headerPos))) {
-                oldHeader.visible()
+                oldHeader.isVisible = true
             }
         }
         Log.d("restore header item")

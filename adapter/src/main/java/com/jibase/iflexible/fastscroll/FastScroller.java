@@ -31,7 +31,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.jibase.R;
-import com.jibase.utils.Log;
+import com.jibase.iflexible.utils.Log;
 
 import java.lang.annotation.Retention;
 import java.lang.reflect.Method;

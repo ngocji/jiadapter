@@ -10,7 +10,7 @@ import com.jibase.iflexible.adapter.FlexibleAdapter.Companion.IDLE
 import com.jibase.iflexible.adapter.FlexibleAdapter.Companion.MULTI
 import com.jibase.iflexible.adapter.FlexibleAdapter.Companion.SINGLE
 import com.jibase.iflexible.adapter.FlexibleAdapter
-import com.jibase.utils.Log
+import com.jibase.iflexible.utils.Log
 
 class ActionModeHelper(
         val targetActivity: AppCompatActivity,

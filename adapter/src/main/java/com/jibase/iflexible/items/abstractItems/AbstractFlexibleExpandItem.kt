@@ -1,6 +1,6 @@
 package com.jibase.iflexible.items.abstractItems
 
-import com.jibase.extensions.hasPosition
+import com.jibase.iflexible.extensions.hasPosition
 import com.jibase.iflexible.items.interfaceItems.IExpandable
 import com.jibase.iflexible.items.interfaceItems.IFlexible
 import com.jibase.iflexible.viewholder.FlexibleExpandableViewHolder

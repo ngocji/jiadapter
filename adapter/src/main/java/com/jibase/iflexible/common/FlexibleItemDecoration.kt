@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
-import com.jibase.extensions.getDimensionPixelOffset
+import com.jibase.iflexible.extensions.getDimensionPixelOffset
 import com.jibase.iflexible.adapter.FlexibleAdapter
 import com.jibase.iflexible.utils.LayoutUtils
 import kotlin.math.roundToInt

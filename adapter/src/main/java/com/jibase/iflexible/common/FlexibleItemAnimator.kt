@@ -10,7 +10,7 @@ import androidx.core.view.ViewPropertyAnimatorListener
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.SimpleItemAnimator
 import com.jibase.iflexible.viewholder.AnimatedViewHolder
-import com.jibase.utils.Log
+import com.jibase.iflexible.utils.Log
 import java.util.*
 
 open class FlexibleItemAnimator() : SimpleItemAnimator() {

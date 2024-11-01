@@ -1,8 +1,8 @@
 package com.jibase.iflexible.adapter
 
 import android.os.Bundle
+import androidx.core.view.ViewCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.jibase.extensions.changeElevation
 import com.jibase.iflexible.adapter.FlexibleAdapter.Companion.IDLE
 import com.jibase.iflexible.adapter.FlexibleAdapter.Companion.SINGLE
 import com.jibase.iflexible.common.FlexibleLayoutManager
@@ -10,7 +10,7 @@ import com.jibase.iflexible.common.IFlexibleLayoutManager
 import com.jibase.iflexible.entities.Payload
 import com.jibase.iflexible.fastscroll.FastScroller
 import com.jibase.iflexible.viewholder.FlexibleViewHolder
-import com.jibase.utils.Log
+import com.jibase.iflexible.utils.Log
 import java.util.*
 
 abstract class AbstractFlexibleAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>(),
@@ -208,7 +208,6 @@ abstract class AbstractFlexibleAdapter : RecyclerView.Adapter<RecyclerView.ViewH
         } else {
             addSelection(position, true)
         }
-//        notifyItemChanged(position)
         Log.d(
             "toggleSelection $position on position $position, current $selectedPositions ," +
                     if (contains) "removed" else "added", TAG
@@ -373,9 +372,9 @@ abstract class AbstractFlexibleAdapter : RecyclerView.Adapter<RecyclerView.ViewH
         if (holder is FlexibleViewHolder) {
             holder.contentView.isActivated = isSelected(position)
             if (holder.contentView.isActivated && holder.getActivationElevation() > 0) {
-                holder.contentView.changeElevation(holder.getActivationElevation())
+                ViewCompat.setElevation(holder.contentView, holder.getActivationElevation())
             } else if (holder.getActivationElevation() > 0) { // Leave unaltered the default elevation
-                holder.contentView.changeElevation(0f)
+                ViewCompat.setElevation(holder.contentView, 0f)
             }
             if (holder.isRecyclable) {
                 boundViewHolders.add(holder)
@@ -534,5 +533,4 @@ abstract class AbstractFlexibleAdapter : RecyclerView.Adapter<RecyclerView.ViewH
     override fun onFastScrollerStateChange(scrolling: Boolean) {
         isFastScroll = scrolling
     }
-
 }
