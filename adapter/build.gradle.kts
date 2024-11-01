@@ -24,15 +24,25 @@ android {
             )
         }
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
+
     kotlinOptions {
         jvmTarget = "17"
     }
+
     buildFeatures {
         viewBinding = true
+    }
+
+    publishing {
+        singleVariant("release") {
+            withSourcesJar()
+            withJavadocJar()
+        }
     }
 }
 
@@ -42,10 +52,14 @@ dependencies {
 
 publishing {
     publications {
-        create<MavenPublication>("jiadapter") {
-            groupId = "com.ngocji"
+        register<MavenPublication>("release") {
+            groupId = "ngocji"
             artifactId = "jiadapter"
             version = "1.0.0"
+
+            afterEvaluate {
+                from(components["release"])
+            }
         }
     }
 }
